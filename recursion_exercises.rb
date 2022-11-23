@@ -99,3 +99,26 @@ end
 # p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
 # p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
 
+def merge_sort(arr)
+    return arr if arr.length <= 1
+    size = arr.length/2 
+    left_arr = arr[0...size] #1, 4 
+    right_arr = arr[size..-1]
+
+    merge(merge_sort(left_arr), merge_sort(right_arr))
+end 
+
+def merge(arr1, arr2)
+    if arr1[0] < arr2[0]
+        arr1 + arr2 
+    else  
+        arr2 + arr1 
+    end
+end 
+
+
+arr1 = [1, 4, 2, 5]
+arr2 = [3, 4, 2, 7, 4, 3]
+
+p merge_sort(arr1)
+p merge_sort(arr2)
