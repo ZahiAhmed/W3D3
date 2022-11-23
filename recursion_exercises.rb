@@ -109,16 +109,25 @@ def merge_sort(arr)
 end 
 
 def merge(arr1, arr2)
-    if arr1[0] < arr2[0]
-        arr1 + arr2 
-    else  
-        arr2 + arr1 
+    array = arr1 + arr2
+    value = false
+    while value == false
+        value = true
+        array.each_with_index do |ele1, idx1|
+            array.each_with_index do |ele2, idx2|
+                if idx2 > idx1 && ele1 > ele2
+                    ele1, ele2 = ele2, ele1
+                    value = false
+                end
+            end
+        end
     end
+    array
 end 
-
 
 arr1 = [1, 4, 2, 5]
 arr2 = [3, 4, 2, 7, 4, 3]
 
 p merge_sort(arr1)
 p merge_sort(arr2)
+
