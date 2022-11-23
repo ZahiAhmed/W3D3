@@ -1,3 +1,5 @@
+require "byebug"
+
 def range(min, max)
     return [] if max <= min
     range(min, max-1) + [max-1]  
@@ -75,20 +77,25 @@ def bsearch(array, target)
     size = array.length/2
     return nil if array.length == 1 && target != array[0]
     return size if target == array[size]
-    if target < array[size]
-        left_arr = array[0...size]
+    left_arr = array[0...size]
+    right_arr = array[size..-1]
+    if target < array[size]    
         bsearch(left_arr, target)
-    else  
-        right_arr = array[size..-1]
-        bsearch(right_arr, target) + size
+    else        
+         if bsearch(right_arr, target) == nil
+            return nil
+         else
+            bsearch(right_arr,target) + size
+         end
     end
 end 
 
 
-p bsearch([1, 2, 3], 1) # => 0
-p bsearch([2, 3, 4, 5], 3) # => 1
-p bsearch([2, 4, 6, 8, 10], 6) # => 2
-p bsearch([1, 3, 4, 5, 9], 5) # => 3
-p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
-p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
-p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
+# p bsearch([1, 2, 3], 1) # => 0
+# p bsearch([2, 3, 4, 5], 3) # => 1
+# p bsearch([2, 4, 6, 8, 10], 6) # => 2
+# p bsearch([1, 3, 4, 5, 9], 5) # => 3
+# p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
+# p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
+# p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
+
