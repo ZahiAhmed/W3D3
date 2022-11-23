@@ -39,5 +39,26 @@ end
 
 
 def deep_dup(arr)
-    arr = arr.dup 
-end 
+    new_array = []
+    arr.each do |ele| 
+        if ele.is_a?(Array)
+            if ele.length == 1
+                new_array.push(ele)
+            else
+               new_array.push(deep_dup(ele))
+            end 
+        else
+            new_array.push(ele)
+        end
+    end
+    new_array
+end
+
+# array = [1, [2], [3, [4]]]
+# p deep_dup(array)
+
+def fibonacci(n)
+    return 0 if n <= 1
+    return 1 if n == 2
+    
+end
