@@ -99,35 +99,49 @@ end
 # p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
 # p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
 
-def merge_sort(arr)
-    return arr if arr.length <= 1
-    size = arr.length/2 
-    left_arr = arr[0...size] #1, 4 
-    right_arr = arr[size..-1]
+# def merge_sort(arr)
+#     return arr if arr.length <= 1
+#     size = arr.length/2 
+#     left_arr = arr[0...size] #1, 4 
+#     right_arr = arr[size..-1]
 
-    merge(merge_sort(left_arr), merge_sort(right_arr))
+#     merge(merge_sort(left_arr), merge_sort(right_arr))
+# end 
+
+# def merge(arr1, arr2)
+#     array = arr1 + arr2
+#     value = false
+#     while value == false
+#         value = true
+#         array.each_with_index do |ele1, idx1|
+#             array.each_with_index do |ele2, idx2|
+#                 if idx2 > idx1 && ele1 > ele2
+#                     ele1, ele2 = ele2, ele1
+#                     value = false
+#                 end
+#             end
+#         end
+#     end
+#     array
+# end 
+
+# arr1 = [1, 4, 2, 5]
+# arr2 = [3, 4, 2, 7, 4, 3]
+
+# p merge_sort(arr1)
+# p merge_sort(arr2)
+
+
+def subsets(arr)
+    return [[]] if arr.length == 0
+    return [[], arr] if arr.length == 1
+    return (subsets(arr[0...-1]) + subsets(arr.drop(1))) << arr
+    #subsets(arr[0...-1]) + arr[-1] 
+
 end 
 
-def merge(arr1, arr2)
-    array = arr1 + arr2
-    value = false
-    while value == false
-        value = true
-        array.each_with_index do |ele1, idx1|
-            array.each_with_index do |ele2, idx2|
-                if idx2 > idx1 && ele1 > ele2
-                    ele1, ele2 = ele2, ele1
-                    value = false
-                end
-            end
-        end
-    end
-    array
-end 
-
-arr1 = [1, 4, 2, 5]
-arr2 = [3, 4, 2, 7, 4, 3]
-
-p merge_sort(arr1)
-p merge_sort(arr2)
-
+p subsets([]) # => [[]]
+p subsets([1]) # => [[], [1]]
+p subsets([1, 2]) # => [[], [1], [2], [1, 2]]
+p subsets([1, 2, 3])
+# => [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
